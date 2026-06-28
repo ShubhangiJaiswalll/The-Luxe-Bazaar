@@ -1,0 +1,27 @@
+.full-logo {
+  width: 430px;
+  height: auto;
+  object-fit: contain;
+  display: block;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+.navbar {
+  padding: 16px 8%;
+  min-height: 115px;
+}
+
+@media (max-width: 768px) {
+  .full-logo {
+    width: 280px;
+  }
+
+  .navbar {
+    min-height: auto;
+  }
+}
