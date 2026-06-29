@@ -7,6 +7,7 @@ function Navbar({
   user,
   setUser,
   setShowAuth,
+  setCurrentView,
 }) {
   const [openMenu, setOpenMenu] = useState(false);
 
@@ -21,18 +22,20 @@ function Navbar({
     localStorage.removeItem("luxeUser");
     setUser(null);
     setOpenMenu(false);
+    setCurrentView("home");
   };
 
   return (
     <nav className="navbar">
       <div
         className="brand"
-        onClick={() =>
+        onClick={() => {
+          setCurrentView("home");
           window.scrollTo({
             top: 0,
             behavior: "smooth",
-          })
-        }
+          });
+        }}
       >
         <img
           src="/logo/full-logo.jpeg"
@@ -42,25 +45,73 @@ function Navbar({
       </div>
 
       <div className="nav-links">
-        <button onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}>
+        <button
+          onClick={() => {
+            setCurrentView("home");
+            window.scrollTo({
+              top: 0,
+              behavior: "smooth",
+            });
+          }}
+        >
           Home
         </button>
 
-        <button onClick={() => scrollToSection("shop")}>Shop</button>
+        <button
+          onClick={() => {
+            setCurrentView("home");
+            setTimeout(() => scrollToSection("shop"), 100);
+          }}
+        >
+          Shop
+        </button>
 
-        <button onClick={() => scrollToSection("shop")}>Beauty</button>
+        <button
+          onClick={() => {
+            setCurrentView("home");
+            setTimeout(() => scrollToSection("shop"), 100);
+          }}
+        >
+          Beauty
+        </button>
 
-        <button onClick={() => scrollToSection("shop")}>Fashion</button>
+        <button
+          onClick={() => {
+            setCurrentView("home");
+            setTimeout(() => scrollToSection("shop"), 100);
+          }}
+        >
+          Fashion
+        </button>
 
-        <button onClick={() => scrollToSection("wishlist")}>Wishlist</button>
+        <button
+          onClick={() => {
+            setCurrentView("home");
+            setTimeout(() => scrollToSection("wishlist"), 100);
+          }}
+        >
+          Wishlist
+        </button>
       </div>
 
       <div className="nav-actions">
-        <button className="icon-btn" onClick={() => scrollToSection("wishlist")}>
+        <button
+          className="icon-btn"
+          onClick={() => {
+            setCurrentView("home");
+            setTimeout(() => scrollToSection("wishlist"), 100);
+          }}
+        >
           ♡ <span>{wishlistCount}</span>
         </button>
 
-        <button className="icon-btn" onClick={() => setIsCartOpen(true)}>
+        <button
+          className="icon-btn"
+          onClick={() => {
+            setCurrentView("home");
+            setIsCartOpen(true);
+          }}
+        >
           🛒 <span>{cartCount}</span>
         </button>
 
@@ -79,28 +130,64 @@ function Navbar({
 
                 <button
                   onClick={() => {
-                    scrollToSection("wishlist");
+                    setCurrentView("profile");
                     setOpenMenu(false);
                   }}
                 >
-                  My Wishlist
+                  👤 My Profile
                 </button>
 
                 <button
                   onClick={() => {
+                    setCurrentView("orders");
+                    setOpenMenu(false);
+                  }}
+                >
+                  📦 My Orders
+                </button>
+
+                <button
+                  onClick={() => {
+                    setCurrentView("checkout");
+                    setOpenMenu(false);
+                  }}
+                >
+                  💳 Checkout
+                </button>
+
+                <button
+                  onClick={() => {
+                    setCurrentView("home");
+                    setTimeout(() => {
+                      scrollToSection("wishlist");
+                    }, 100);
+                    setOpenMenu(false);
+                  }}
+                >
+                  ❤️ My Wishlist
+                </button>
+
+                <button
+                  onClick={() => {
+                    setCurrentView("home");
                     setIsCartOpen(true);
                     setOpenMenu(false);
                   }}
                 >
-                  My Cart
+                  🛒 My Cart
                 </button>
 
-                <button onClick={logout}>Logout</button>
+                <button onClick={logout}>
+                  🚪 Logout
+                </button>
               </div>
             )}
           </div>
         ) : (
-          <button className="login-btn" onClick={() => setShowAuth(true)}>
+          <button
+            className="login-btn"
+            onClick={() => setShowAuth(true)}
+          >
             Login
           </button>
         )}

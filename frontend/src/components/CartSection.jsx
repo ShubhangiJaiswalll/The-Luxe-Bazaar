@@ -1,10 +1,16 @@
 import toast from "react-hot-toast";
-import API from "../api/api";
 
-function CartSection({ cart, removeFromCart, isCartOpen, setIsCartOpen, user }) {
-  const total = cart.reduce((sum, item) => sum + item.price, 0);
+function CartSection({
+  cart,
+  removeFromCart,
+  isCartOpen,
+  setIsCartOpen,
+  user,
+  setCurrentView,
+}) {
+  const total = cart.reduce((sum, item) => sum + Number(item.price), 0);
 
-  const placeOrder = async () => {
+  const goToCheckout = () => {
     if (!user) {
       toast.error("Please login before checkout");
       return;
@@ -15,18 +21,8 @@ function CartSection({ cart, removeFromCart, isCartOpen, setIsCartOpen, user }) 
       return;
     }
 
-    try {
-      const { data } = await API.post("/orders", {
-        userEmail: user.email,
-        items: cart,
-        total,
-      });
-
-      toast.success(data.message);
-      setIsCartOpen(false);
-    } catch (error) {
-      toast.error("Order failed");
-    }
+    setIsCartOpen(false);
+    setCurrentView("checkout");
   };
 
   return (
@@ -34,11 +30,12 @@ function CartSection({ cart, removeFromCart, isCartOpen, setIsCartOpen, user }) 
       <div
         className={`cart-overlay ${isCartOpen ? "show" : ""}`}
         onClick={() => setIsCartOpen(false)}
-      ></div>
+      />
 
       <aside className={`cart-drawer ${isCartOpen ? "open" : ""}`}>
         <div className="cart-header">
           <h2>Your Bag</h2>
+
           <button onClick={() => setIsCartOpen(false)}>×</button>
         </div>
 
@@ -48,27 +45,37 @@ function CartSection({ cart, removeFromCart, isCartOpen, setIsCartOpen, user }) 
             <p>Add something luxe to your bag.</p>
           </div>
         ) : (
-          <div className="drawer-items">
-            {cart.map((item, index) => (
-              <div className="drawer-item" key={index}>
-                <img src={item.image} alt={item.name} />
+          <>
+            <div className="drawer-items">
+              {cart.map((item, index) => (
+                <div className="drawer-item" key={index}>
+                  <img src={item.image} alt={item.name} />
 
-                <div>
-                  <h4>{item.name}</h4>
-                  <p>₹{item.price}</p>
-                  <button onClick={() => removeFromCart(index)}>Remove</button>
+                  <div>
+                    <h4>{item.name}</h4>
+
+                    <p>₹{item.price}</p>
+
+                    <button onClick={() => removeFromCart(index)}>
+                      Remove
+                    </button>
+                  </div>
                 </div>
-              </div>
-            ))}
-          </div>
-        )}
+              ))}
+            </div>
 
-        <div className="cart-footer">
-          <h3>Total: ₹{total}</h3>
-          <button className="checkout-btn" onClick={placeOrder}>
-            Checkout
-          </button>
-        </div>
+            <div className="cart-footer">
+              <h3>Total : ₹{total}</h3>
+
+              <button
+                className="checkout-btn"
+                onClick={goToCheckout}
+              >
+                Proceed to Checkout
+              </button>
+            </div>
+          </>
+        )}
       </aside>
     </>
   );
