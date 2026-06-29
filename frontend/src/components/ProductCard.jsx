@@ -18,7 +18,14 @@ function ProductCard({ product, addToCart, addToWishlist, setSelectedProduct }) 
           ♡
         </button>
 
-        <img className="product-img" src={product.image} alt={product.name} />
+        <img
+  src={
+    product.image?.startsWith("http")
+      ? product.image
+      : `https://the-luxe-bazaar.onrender.com${product.image}`
+  }
+  alt={product.name}
+/>
       </div>
 
       <p className="product-category">{product.category}</p>

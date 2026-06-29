@@ -1,3 +1,7 @@
+import fashionImg from "../assets/images/fashion.jpg";
+import beautyImg from "../assets/images/beauty.jpg";
+import skincareImg from "../assets/images/skincare.jpg";
+
 function Hero() {
   return (
     <section className="hero">
@@ -49,17 +53,17 @@ function Hero() {
 
       <div className="hero-visual">
         <div className="hero-card main-card">
-          <img src="/src/assets/images/fashion.jpg" alt="Fashion" />
+          <img src={fashionImg} alt="Fashion" />
           <span>Fashion Edit</span>
         </div>
 
         <div className="hero-card small-card card-a">
-          <img src="/src/assets/images/beauty.jpg" alt="Beauty" />
+          <img src={beautyImg} alt="Beauty" />
           <span>Beauty Glow</span>
         </div>
 
         <div className="hero-card small-card card-b">
-          <img src="/src/assets/images/skincare.jpg" alt="Skincare" />
+          <img src={skincareImg} alt="Skincare" />
           <span>Skin Rituals</span>
         </div>
 
