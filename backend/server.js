@@ -7,11 +7,13 @@ dotenv.config();
 
 const authRoutes = require("./routes/authRoutes");
 const productRoutes = require("./routes/productRoutes");
-
+const uploadRoutes = require("./routes/uploadRoutes");
 const app = express();
 
 app.use(cors());
 app.use(express.json());
+app.use("/api/upload", uploadRoutes);
+app.use("/uploads", express.static("uploads"));
 
 app.use("/api/auth", authRoutes);
 app.use("/api/products", productRoutes);

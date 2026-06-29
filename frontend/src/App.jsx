@@ -169,7 +169,9 @@ const [user, setUser] = useState(
         setSelectedProduct={setSelectedProduct}
         addToCart={addToCart}
       />
-{user?.role === "admin" && <AdminPanel setProductList={setProductList} />}
+{user?.role === "admin" && (
+  <AdminPanel productList={productList} setProductList={setProductList} />
+)}
       <Newsletter />
 
       <Footer />
