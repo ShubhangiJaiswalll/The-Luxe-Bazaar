@@ -7,7 +7,6 @@ function Hero() {
     <section className="hero">
       <div className="hero-content">
         <span className="hero-badge">NEW DROP 2026 ✨</span>
-
         <p className="tag">DESI LUXE MARKETPLACE</p>
 
         <h1>
@@ -31,23 +30,6 @@ function Hero() {
           </button>
 
           <button className="secondary-btn">Explore Beauty</button>
-        </div>
-
-        <div className="hero-stats">
-          <div>
-            <h3>2500+</h3>
-            <p>Happy Customers</p>
-          </div>
-
-          <div>
-            <h3>4.8★</h3>
-            <p>Average Rating</p>
-          </div>
-
-          <div>
-            <h3>50+</h3>
-            <p>Luxury Picks</p>
-          </div>
         </div>
       </div>
 
