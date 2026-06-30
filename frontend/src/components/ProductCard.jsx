@@ -1,4 +1,12 @@
 function ProductCard({ product, addToCart, addToWishlist, setSelectedProduct }) {
+  const backendURL = "https://the-luxe-bazaar.onrender.com";
+
+  const imageURL = product.image?.startsWith("http")
+    ? product.image
+    : product.image?.startsWith("/uploads")
+    ? `${backendURL}${product.image}`
+    : product.image;
+
   const discount = Math.round(
     ((product.originalPrice - product.price) / product.originalPrice) * 100
   );
@@ -18,18 +26,10 @@ function ProductCard({ product, addToCart, addToWishlist, setSelectedProduct }) 
           ♡
         </button>
 
-        <img
-  src={
-    product.image?.startsWith("http")
-      ? product.image
-      : `https://the-luxe-bazaar.onrender.com${product.image}`
-  }
-  alt={product.name}
-/>
+        <img className="product-img" src={imageURL} alt={product.name} />
       </div>
 
       <p className="product-category">{product.category}</p>
-
       <h3>{product.name}</h3>
 
       <div className="rating">
